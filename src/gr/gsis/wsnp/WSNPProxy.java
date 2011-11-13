@@ -65,6 +65,7 @@ public class WSNPProxy {
 	}
 	
 	public void setEndpoint(String endpoint) {
+		this.endpoint = endpoint;
 		((javax.xml.ws.BindingProvider)service).getRequestContext().put(javax.xml.ws.BindingProvider.ENDPOINT_ADDRESS_PROPERTY, endpoint);
 	}
 	
