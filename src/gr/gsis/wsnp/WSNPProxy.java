@@ -9,8 +9,9 @@ public class WSNPProxy {
 	protected String endpoint;
 	
 	public WSNPProxy(String endpoint) {
+		this.endpoint = endpoint;
 		service = new RgWsBasStoixN_Service().getRgWsBasStoixNSoapHttpPort();
-		((javax.xml.ws.BindingProvider)service).getRequestContext().put(javax.xml.ws.BindingProvider.ENDPOINT_ADDRESS_PROPERTY, endpoint);
+		setEndpoint(this.endpoint);
 	}
 
 	public String rgWsBasStoixNVersionInfo() {
@@ -47,4 +48,11 @@ public class WSNPProxy {
 		return response;
 	}
 	
+	public void setEndpoint(String endpoint) {
+		((javax.xml.ws.BindingProvider)service).getRequestContext().put(javax.xml.ws.BindingProvider.ENDPOINT_ADDRESS_PROPERTY, endpoint);
+	}
+	
+	public String getEndpoint() {
+		return this.endpoint;
+	}
 }
