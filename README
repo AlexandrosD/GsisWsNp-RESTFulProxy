@@ -1,0 +1,8 @@
+This is an example of using the WebService provided by the Greek General Secretariat of Information Systems.
+As soon as the WebService anounced to public, many individuals requested a RESTFul interface for accessing this service.
+
+This project is a RESTFull proxy to the aforementioned web service.
+
+Usage:
+http://host:port/WsNpProxy/afm/version returns the version of the GSIS Service
+http://host:port/WsNpProxy/afm/{afm} returns a json object holding the information of the afm {afm}
