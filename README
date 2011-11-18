@@ -1,8 +1,35 @@
+WsNpRESTProxy
+=======================
+Summary:
+-----------------------
 This is an example of using the WebService provided by the Greek General Secretariat of Information Systems.
 As soon as the WebService anounced to public, many individuals requested a RESTFul interface for accessing this service.
 
-This project is a RESTFull proxy to the aforementioned web service.
+Documentation:
+-----------------------
+This project is a RESTFul proxy to the aforementioned web service.
+The implementation is based on the the following technologies/frameworks:
+- JAX-WS RI is used to call the WSNP WebService of GSIS for a particular VAT id and retrieve its details. (http://jax-ws.java.net/)
+- JAXB annotations are used in order to create the representation of the data entities involved in the aforementioned service calls (SOAP Request/ Response). (http://jaxb.java.net/)
+- Jersey/JAX-RS framework is used to generate the REST Service Enpoints and for transforming JAXB entities to JSON representations. (http://jersey.java.net/)
 
 Usage:
-http://host:port/WsNpProxy/afm/version returns the version of the GSIS Service
-http://host:port/WsNpProxy/afm/{afm} returns a json object holding the information of the afm {afm}
+-----------------------
+The compiled code (war package) can be deployed on any Servlet Container (http://en.wikipedia.org/wiki/List_of_Servlet_containers). Below you can see usage examples:
+
+- http://host:port/WsNpProxy/afm/version returns the version of the GSIS Service
+i.e. An HTTP GET Request to http://www.example.com:8080/WsNpProxy/afm/version will return:
+	Version: 0.2, 04/11/2011, Copyright: GSIS 2011.
+
+- http://host:port/WsNpProxy/afm/{afm} returns a json object holding the information of the afm {afm}
+i.e. An HTTP GET Request to http://www.example.com:8080/WsNpProxy/afm/093683423 will return:
+	{"pBasStoixNRecOut":{"actLongDescr":"ΛΙΑΝΙΚΟ ΕΜΠΟΡΙΟ SUPER MARKET, ΜΕ ΕΜΦΑΣΗ ΣΤΟ ΕΜΠΟΡΙΟ ΤΡΟΦΙΜΩΝ","postalZipCode":"57001","facActivity":"47111001","registDate":"1996-07-09T00:00:00.000+03:00","stopDate":{"@nil":"true"},"doyDescr":"ΜΕΓΑΛΩΝ ΕΠΙΧΕΙΡΗΣΕΩΝ","parDescription":"ΘΕΡΜΗ","deactivationFlag":"1","postalAddressNo":"0        ","postalAddress":"14 ΧΛΜ ΘΕΣ/ΝΙΚΗΣ ΜΗΧΑΝΙΩΝΑΣ","doy":"1118","firmPhone":"490700","onomasia":"ΛΙΝΤΛ ΕΛΛΑΣ ΚΑΙ ΣΙΑ ΟΜΟΡΡΥΘΜΗ ΕΤΑΙΡΙΑ","firmFax":{"@nil":"true"},"afm":"093683423   ","commerTitle":{"@nil":"true"}},"pCallSeqIdOut":"3036674","pErrorRecOut":{"errorDescr":{"@nil":"true"},"errorCode":{"@nil":"true"}}}
+
+These calls may be performed by any other application.
+
+Demo:
+----------------------
+A Demo of this application has been deployed on Google Appengine, and is accesible on the following URLs:
+- http://wsnpjsonbridge.appspot.com/afm/version
+- http://wsnpjsonbridge.appspot.com/afm/093683423 (replace the VAT id with anything you like)
+
